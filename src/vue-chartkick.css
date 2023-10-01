@@ -1,0 +1,24 @@
+/* vue-chartkick styles */
+.chartkick {
+    position: relative;
+  }
+  
+  .chartkick[data-highcharts] {
+    overflow: hidden;
+  }
+  
+  .chartkick[data-highcharts] > div {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .chartkick[data-highcharts] .highcharts-container {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+  }
+  
