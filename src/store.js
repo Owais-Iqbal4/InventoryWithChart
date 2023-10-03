@@ -8,6 +8,7 @@ const store = new Vuex.Store({
         def: 'my name is owais',
         searchProduct: '',
         selectCategory: '',
+        orders:[],
         currentSaleData: {
             date: '',
             value: 0,
@@ -142,7 +143,8 @@ const store = new Vuex.Store({
         getSearchProduct: state => state.searchProduct,
         getSelectCategory: state => state.selectCategory,
         getProducts: state => state.products,
-        getCurrentSaleData:state=> state.currentSaleData
+        getCurrentSaleData:state=> state.currentSaleData,
+        getOrders: state => state.orders
     },
     mutations: {
         SEARCH_PRODUCT(state, payload) {
@@ -157,6 +159,9 @@ const store = new Vuex.Store({
         CURRENT_SALES_DATA(state, payload){
             state.currentSaleData = payload
             console.log('in store ',state.currentSaleData)
+        },
+        ORDERS(state,payload){
+            state.orders.push(payload)
         }
     }
 })

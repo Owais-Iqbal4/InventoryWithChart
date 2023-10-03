@@ -50,6 +50,7 @@ export default {
 
             this.currentSaleData.value = this.getProducts[index].price
             this.currentSaleData.dataset = this.getProducts[index].name
+            this.$store.commit('ORDERS', this.getProducts[index])
             
         }
     },
