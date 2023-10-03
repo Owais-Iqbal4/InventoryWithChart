@@ -1,85 +1,52 @@
-// dummyData.js
-const dummyData = {
-    monthly: {
-      'Oct 2023': {
-        'Product A': 750,
-        'Product B': 1200,
-        // ... more products
-      },
-      'Nov 2023': {
-        'Product A': 900,
-        'Product B': 1400,
-        // ... more products
-      },
-      // ... more months
-    },
-    yearly: {
-      '2021': {
-        'Product A': 3000,
-        'Product B': 7000,
-        // ... more products
-      },
-      '2022': {
-        'Product A': 4000,
-        'Product B': 8000,
-        // ... more products
-      },
-      // ... more years
-    }
-  };
-  
-
-
-
-
-//   
-
 
 export var data123 = {
-    daily:[
-
-        { name: "Mon", value: 10000, dataset: "Shoes" },
-        { name: "Tue", value: 12000, dataset: "Women Cloths" },
-        { name: "Tue", value: 12000, dataset: "Men Cloths" },
-        { name: "Wed", value: 0, dataset: "" },
-        { name: "Thur", value: 12000, dataset: "Baby Cloths" },
-        { name: "Fri", value: 12000, dataset: "Brushes" },
-        { name: "Sat", value: 13000, dataset: "Women Cloths" },
-        { name: "Sun", value: 10000, dataset: "Sandles" },
+    // ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    daily: [
+        
+        { name: "Sunday", value: 0, dataset: "" },
+        { name: "Monday", value: 0, dataset: "" },
+        { name: "Tuesday", value: 0, dataset: "" },
+        { name: "Wednesday",value: 0, dataset: "" },
+        { name: "Thursday", value: 0, dataset: "" },
+        { name: "Friday", value: 0, dataset: "" },
+        { name: "Saturday", value: 0, dataset: "" },
+       
     ],
-    weakly:[
+    weakly: [
 
-        { name: "John", value: 10000, dataset: "Dataset 1" },
-        { name: "John", value: 12000, dataset: "Dataset 2" },
-        { name: "John", value: 12000, dataset: "Dataset 3" },
-        { name: "John", value: 12000, dataset: "Dataset 5" },
-        { name: "Jake", value: 12000, dataset: "Dataset 3" },
-        { name: "Peter", value: 13000, dataset: "Dataset 4" },
-        { name: "James", value: 10000, dataset: "Dataset 5" },
-        { name: "Mary", value: 9000, dataset: "Dataset 6" }
+        {  name: "This Weak", value: 0, dataset: "" },
+        {  name: "Weak 1", value: 0, dataset: "" },
+        {  name: "Weak 2", value: 0, dataset: "" },
+        {  name: "Weak 3", value: 0, dataset: "" },
+
+
     ],
-    monthly:[
+    // January", "February", "March", "April", "May", "June",
+    //             "July", "August", "September", "October", "November", "December"
+    monthly: [
 
-        { name: "John", value: 10000, dataset: "Dataset 1" },
-        { name: "John", value: 12000, dataset: "Dataset 2" },
-        { name: "John", value: 12000, dataset: "Dataset 3" },
-        { name: "John", value: 12000, dataset: "Dataset 5" },
-        { name: "Jake", value: 12000, dataset: "Dataset 3" },
-        { name: "Peter", value: 13000, dataset: "Dataset 4" },
-        { name: "James", value: 10000, dataset: "Dataset 5" },
-        { name: "Mary", value: 9000, dataset: "Dataset 6" }
+        { name: "January",   value: 0, dataset: "" },
+        { name: "February",   value: 0, dataset: "" },
+        { name: "March", value: 0, dataset: "" },
+        { name: "April", value: 0, dataset: "" },
+        { name: "May",   value: 0, dataset: "" },
+        { name: "June",  value: 0, dataset: "" },
+        { name: "July",  value: 0, dataset: "" },
+        { name: "July",  value: 0, dataset: "" },
+        { name: "July",  value: 0, dataset: "" },
+        { name: "August",   value: 0, dataset: "" },
+        { name: "September",   value: 0, dataset: "" },
+        { name: "October",   value: 0, dataset: "" },
+        { name: "November",   value: 0, dataset: "" },
+        { name: "December",   value: 0, dataset: "" },
     ],
-    yearly:[
+    yearly: [
 
-        { name: "John", value: 10000, dataset: "Dataset 1" },
-        { name: "John", value: 12000, dataset: "Dataset 2" },
-        { name: "John", value: 12000, dataset: "Dataset 3" },
-        { name: "John", value: 12000, dataset: "Dataset 5" },
-        { name: "Jake", value: 12000, dataset: "Dataset 3" },
-        { name: "Peter", value: 13000, dataset: "Dataset 4" },
-        { name: "James", value: 10000, dataset: "Dataset 5" },
-        { name: "Mary", value: 9000, dataset: "Dataset 6" }
+        { name: "This Year", value: 0, dataset: "" },
+        { name: "Year 1", value: 0, dataset: "" },
+        { name: "Year 2", value: 0, dataset: "" },
+        { name: "Year 3", value: 0, dataset: "" },
+        { name: "Year 4", value: 0, dataset: "" },
+
     ]
 };
-  export default dummyData;
-  

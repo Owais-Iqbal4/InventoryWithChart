@@ -13,7 +13,8 @@
     "flowbite": "^1.8.1",
     "vue": "^3.3.4",
     "vue-chartjs": "^5.2.0",
-    "vue-chartkick": "^1.1.0"
+    "vue-chartkick": "^1.1.0",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
