@@ -2,7 +2,7 @@
     <div class="p-2">
       <label>Select Time Period:</label>
       <select v-model="selectedPeriod">
-        <option value="">Select value</option>
+        <option value="">Select Interval</option>
         <option class="" value="daily">daily</option>
         <option value="weakly">Weakly</option>
         <option value="monthly">Monthly</option>
@@ -12,10 +12,9 @@
       <h1 v-else>Please selec Time Duration</h1>
     </div>
   </template>
-  
+
   <script>
 
-  // import { this.getChartData } from '../data'
   import {mapGetters} from 'vuex'
   export default {
     data() {

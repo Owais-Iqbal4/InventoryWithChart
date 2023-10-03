@@ -1,7 +1,7 @@
 <template>
     <div style="display: flex;gap: 10px; padding-bottom: 10px;">
-        <input type="date" v-model="currentSaleData.date">
-        <select v-model="currentSaleData.value">
+        <input type="date" v-model="getCurrentSaleData.date">
+        <select v-model="getCurrentSaleData.value">
             <option value="">select Price</option>
             <option value="100">100</option>
             <option value="200">200</option>
@@ -9,7 +9,7 @@
             <option value="400">400</option>
             <option value="500">500</option>
         </select>
-        <select v-model="currentSaleData.dataset">
+        <select v-model="getCurrentSaleData.dataset">
             <option value="">select Product</option>
             <option value="Shoes">Shoes</option>
             <option value="Men Shirt">Men Shirt</option>
@@ -18,26 +18,28 @@
             <option value="Dinner Set">Dinner Set</option>
         </select>
         <button @click="AddSales">Add Sales</button>
-        
+
     </div>
 </template>
 <script>
 // import sales from '../sales'
 // import { this.getChartData } from '../data'
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
+import { watch } from 'vue';
+import { useStore } from 'vuex'
 export default {
     data() {
         return {
-            currentSaleData: {
-                date: '',
-                value: 0,
-                dataset: ''
-            },
+            // getCurrentSaleData: {
+            //     date: '',
+            //     value: 0,
+            //     dataset: ''
+            // },
 
         }
     },
-    computed:{
-        ...mapGetters(['getDef','getChartData'])
+    computed: {
+        ...mapGetters(['getDef', 'getChartData', 'getCurrentSaleData'])
     },
     beforeMount() {
 
@@ -52,9 +54,9 @@ export default {
             // const day = String(currentDate.getDate()).padStart(2, '0'); 
 
             // const formattedDate = `${year}-${month}-${day}`;
-            // if (this.currentSaleData.date && new Date(formattedDate) >= new Date(this.currentSaleData.date)   && this.currentSaleData.value && this.currentSaleData.dataset) {
-            //     sales.push(this.currentSaleData)
-            //     this.currentSaleData = []
+            // if (this.getCurrentSaleData.date && new Date(formattedDate) >= new Date(this.getCurrentSaleData.date)   && this.getCurrentSaleData.value && this.getCurrentSaleData.dataset) {
+            //     sales.push(this.getCurrentSaleData)
+            //     this.getCurrentSaleData = []
             // }
             // else{
             //     console.log('sorry')
@@ -64,10 +66,11 @@ export default {
 
 
 
-            const selectedDate = new Date(this.currentSaleData.date);
+            const selectedDate = new Date(this.getCurrentSaleData.date);
 
             // Get the current date
             const currentDate = new Date();
+            console.log(currentDate)
 
             // Calculate the time difference in milliseconds
             const timeDifference = currentDate.getTime() - selectedDate.getTime()
@@ -84,17 +87,17 @@ export default {
 
             // Get the day name based on the index
             const dayName = daysOfWeek[dayIndex];
-          
+
             if (dayIndex >= 0) {
                 let flag = false
                 this.getChartData['daily'].filter((item) => {
-                    if (item.dataset == this.currentSaleData.dataset && item.name == dayName) {
-                        item.value = Number(item.value) + Number(this.currentSaleData.value)
+                    if (item.dataset == this.getCurrentSaleData.dataset && item.name == dayName) {
+                        item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
                         flag = true
                     }
                 })
                 if (!flag) {
-                    this.getChartData['daily'].push({ name: `${dayName}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
+                    this.getChartData['daily'].push({ name: `${dayName}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
                 }
             }
 
@@ -118,13 +121,13 @@ export default {
             if (daysDifference >= 0 && daysDifference <= 28) {
                 let flag = false
                 this.getChartData['weakly'].filter((item) => {
-                    if (item.dataset == this.currentSaleData.dataset && item.name == weekSelected) {
-                        item.value = Number(item.value) + Number(this.currentSaleData.value)
+                    if (item.dataset == this.getCurrentSaleData.dataset && item.name == weekSelected) {
+                        item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
                         flag = true
                     }
                 })
                 if (!flag) {
-                    this.getChartData['weakly'].push({ name: `${weekSelected}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
+                    this.getChartData['weakly'].push({ name: `${weekSelected}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
                 }
             }
             const months = [
@@ -142,14 +145,14 @@ export default {
 
                 let flag = false
                 this.getChartData['monthly'].filter((item) => {
-                    if (item.dataset == this.currentSaleData.dataset && selectedMonthName == item.name) {
-                        item.value = Number(item.value) + Number(this.currentSaleData.value)
+                    if (item.dataset == this.getCurrentSaleData.dataset && selectedMonthName == item.name) {
+                        item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
                         flag = true
-                        
+
                     }
                 })
                 if (!flag) {
-                    this.getChartData['monthly'].push({ name: `${selectedMonthName}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
+                    this.getChartData['monthly'].push({ name: `${selectedMonthName}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
 
                 }
 
@@ -161,19 +164,19 @@ export default {
 
             console.log(`Year difference between selected year (${selectedYear}) and current year (${currentYear}) is: ${yearDifference} years.`);
 
-           let years = ["This Year", "Year 1", "Year 2", "Year 3", "Year 4"]
+            let years = ["This Year", "Year 1", "Year 2", "Year 3", "Year 4"]
             let selectedYearName = years[yearDifference]
             if (yearDifference >= 0 && yearDifference < 5) {
                 console.log
                 let flag = false
                 this.getChartData['yearly'].filter((item) => {
-                    if (item.dataset == this.currentSaleData.dataset && item.name == selectedYearName) {
-                        item.value = Number(item.value) + Number(this.currentSaleData.value)
+                    if (item.dataset == this.getCurrentSaleData.dataset && item.name == selectedYearName) {
+                        item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
                         flag = true
                     }
                 })
                 if (!flag) {
-                    this.getChartData['yearly'].push({ name: `${selectedYearName}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
+                    this.getChartData['yearly'].push({ name: `${selectedYearName}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
                 }
             }
             // setInterval(() => {
@@ -181,6 +184,21 @@ export default {
             // }, 1000);
 
         }
-    }
+    },
+    setup() {
+    const store = useStore(); // Get the Vuex store instance
+
+    // Watch for changes in the 'myState' property of the 'myModule' module
+    watch(() => store.state.currentSaleData, (newValue) => {
+      // Perform actions when the state updates
+      console.log('State updated:', newValue);
+      // You can perform additional actions based on the updated state
+    });
+
+    // Your component logic
+
+    return {};
+  },
+    
 }
 </script>
