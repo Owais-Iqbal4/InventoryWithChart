@@ -18,7 +18,7 @@
             <option value="Dinner Set">Dinner Set</option>
         </select>
         <button @click="AddSales">Add Sales</button>
-        <p class="text-[red]"> hi {{ getDef }}</p>
+        
     </div>
 </template>
 <script>

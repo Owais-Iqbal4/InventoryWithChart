@@ -1,14 +1,15 @@
 <template>
   <div>
-
-    <AddSales />
-    <BarChart />
+    <Home />
+    <!-- <AddSales />
+    <BarChart /> -->
   </div>
 </template>
 
 <script>
-import BarChart from '@/components/BarChart.vue'
-import AddSales from '@/components/AddSales.vue'
+import Home from './components/HomePage.vue'
+// import BarChart from '@/components/BarChart.vue'
+// import AddSales from '@/components/AddSales.vue'
 export default {
   data() {
     return {
@@ -16,8 +17,9 @@ export default {
     };
   },
   components: {
-    BarChart,
-    AddSales
+    // BarChart,
+    // AddSales,
+    Home
   }
 
 

@@ -6,6 +6,8 @@ import Vuex from 'vuex'
 const store = new Vuex.Store({
     state: {
         def: 'my name is owais',
+        searchProduct: '',
+        selectCategory: '',
         chartData: {
 
             daily: [
@@ -59,7 +61,17 @@ const store = new Vuex.Store({
     },
     getters: {
         getDef: state => state.def,
-        getChartData: state => state.chartData
+        getChartData: state => state.chartData,
+        getSearchProduct: state => state.searchProduct,
+        getSelectCategory: state => state.selectCategory
+    },
+    mutations: {
+        SEARCH_PRODUCT(state, payload) {
+            state.searchProduct = payload;
+        },
+        SELECT_CATEGORY(state, payload) {
+            state.selectCategory = payload;
+        }
     }
 })
 

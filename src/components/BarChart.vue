@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="p-2">
       <label>Select Time Period:</label>
       <select v-model="selectedPeriod">
         <option value="">Select value</option>
