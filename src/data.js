@@ -1,6 +1,6 @@
 
 export var data123 = {
-    // ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
     daily: [
         
         { name: "Sunday", value: 0, dataset: "" },
@@ -21,8 +21,7 @@ export var data123 = {
 
 
     ],
-    // January", "February", "March", "April", "May", "June",
-    //             "July", "August", "September", "October", "November", "December"
+
     monthly: [
 
         { name: "January",   value: 0, dataset: "" },

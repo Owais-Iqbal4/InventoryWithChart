@@ -18,11 +18,13 @@
             <option value="Dinner Set">Dinner Set</option>
         </select>
         <button @click="AddSales">Add Sales</button>
+        <p class="text-[red]"> hi {{ getDef }}</p>
     </div>
 </template>
 <script>
 // import sales from '../sales'
-import { data123 } from '../data'
+// import { this.getChartData } from '../data'
+import {mapGetters} from 'vuex'
 export default {
     data() {
         return {
@@ -33,6 +35,9 @@ export default {
             },
 
         }
+    },
+    computed:{
+        ...mapGetters(['getDef','getChartData'])
     },
     beforeMount() {
 
@@ -82,14 +87,14 @@ export default {
           
             if (dayIndex >= 0) {
                 let flag = false
-                data123['daily'].filter((item) => {
+                this.getChartData['daily'].filter((item) => {
                     if (item.dataset == this.currentSaleData.dataset && item.name == dayName) {
                         item.value = Number(item.value) + Number(this.currentSaleData.value)
                         flag = true
                     }
                 })
                 if (!flag) {
-                    data123['daily'].push({ name: `${dayName}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
+                    this.getChartData['daily'].push({ name: `${dayName}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
                 }
             }
 
@@ -112,14 +117,14 @@ export default {
 
             if (daysDifference >= 0 && daysDifference <= 28) {
                 let flag = false
-                data123['weakly'].filter((item) => {
+                this.getChartData['weakly'].filter((item) => {
                     if (item.dataset == this.currentSaleData.dataset && item.name == weekSelected) {
                         item.value = Number(item.value) + Number(this.currentSaleData.value)
                         flag = true
                     }
                 })
                 if (!flag) {
-                    data123['weakly'].push({ name: `${weekSelected}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
+                    this.getChartData['weakly'].push({ name: `${weekSelected}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
                 }
             }
             const months = [
@@ -136,7 +141,7 @@ export default {
                 const selectedMonthName = months[selectedMonth];
 
                 let flag = false
-                data123['monthly'].filter((item) => {
+                this.getChartData['monthly'].filter((item) => {
                     if (item.dataset == this.currentSaleData.dataset && selectedMonthName == item.name) {
                         item.value = Number(item.value) + Number(this.currentSaleData.value)
                         flag = true
@@ -144,7 +149,7 @@ export default {
                     }
                 })
                 if (!flag) {
-                    data123['monthly'].push({ name: `${selectedMonthName}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
+                    this.getChartData['monthly'].push({ name: `${selectedMonthName}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
 
                 }
 
@@ -161,18 +166,18 @@ export default {
             if (yearDifference >= 0 && yearDifference < 5) {
                 console.log
                 let flag = false
-                data123['yearly'].filter((item) => {
+                this.getChartData['yearly'].filter((item) => {
                     if (item.dataset == this.currentSaleData.dataset && item.name == selectedYearName) {
                         item.value = Number(item.value) + Number(this.currentSaleData.value)
                         flag = true
                     }
                 })
                 if (!flag) {
-                    data123['yearly'].push({ name: `${selectedYearName}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
+                    this.getChartData['yearly'].push({ name: `${selectedYearName}`, value: this.currentSaleData.value, dataset: this.currentSaleData.dataset })
                 }
             }
             // setInterval(() => {
-            //     console.log('set time ', data123)
+            //     console.log('set time ', this.getChartData)
             // }, 1000);
 
         }

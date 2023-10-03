@@ -3,7 +3,7 @@
       <label>Select Time Period:</label>
       <select v-model="selectedPeriod">
         <option value="">Select value</option>
-        <option class="text-[red]" value="daily">daily</option>
+        <option class="" value="daily">daily</option>
         <option value="weakly">Weakly</option>
         <option value="monthly">Monthly</option>
         <option value="yearly">Yearly</option>
@@ -15,7 +15,8 @@
   
   <script>
 
-  import { data123 } from '../data'
+  // import { this.getChartData } from '../data'
+  import {mapGetters} from 'vuex'
   export default {
     data() {
       return {
@@ -24,10 +25,10 @@
     },
     
     computed: {
-      
+      ...mapGetters(['getChartData']),
       chartData() {
         const groupedData = {};
-        data123[this.selectedPeriod]?.forEach(item => {
+        this.getChartData[this.selectedPeriod]?.forEach(item => {
           if (!groupedData[item.dataset]) {
             groupedData[item.dataset] = [];
           }

@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import './index.css'
-
+import './style.css'
+import store from './store';
 import Chartkick from 'vue-chartkick'
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
@@ -9,6 +9,6 @@ Chart.register(...registerables);
 // app.use(Chartkick);
 
 const app = createApp(App);
-app.mount('#app');
-
 app.use(Chartkick.use(Chart))
+app.use(store);
+app.mount('#app');
