@@ -74,7 +74,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getCurrentSaleData','getChartData'])
+        ...mapGetters(['getCurrentSaleData', 'getChartData'])
     },
     methods: {
         SearchProduct() {
@@ -127,117 +127,121 @@ export default {
                 // Get the current date
                 const currentDate = new Date();
                 console.log(currentDate)
+                
+               
 
-                // Calculate the time difference in milliseconds
-                const timeDifference = currentDate.getTime() - selectedDate.getTime()
+                    // Calculate the time difference in milliseconds
+                    const timeDifference = currentDate.getTime() - selectedDate.getTime()
 
-                // Calculate the days difference
-                const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+                    // Calculate the days difference
+                    const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
 
 
-                // days 
-                const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    // days 
+                    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-                // Calculate the index of the day in the daysOfWeek array
-                let dayIndex = (currentDate.getDay() - daysDifference) % 7;
+                    // Calculate the index of the day in the daysOfWeek array
+                    let dayIndex = (currentDate.getDay() + daysDifference) % 7;
 
-                // Get the day name based on the index
-                const dayName = daysOfWeek[dayIndex];
-
-                if (dayIndex >= 0) {
-                    let flag = false
-                    this.getChartData['daily'].filter((item) => {
-                        if (item.dataset == this.getCurrentSaleData.dataset && item.name == dayName) {
-                            item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
-                            flag = true
+                    // Get the day name based on the index
+                    const dayName = daysOfWeek[dayIndex];
+                    console.log('index', dayIndex, 'daysDifference ', daysDifference)
+                    if (dayIndex >= 0 && daysDifference <= 7) {
+                        let flag = false
+                        this.getChartData['daily'].filter((item) => {
+                            if (item.dataset == this.getCurrentSaleData.dataset && item.name == dayName) {
+                                item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
+                                flag = true
+                            }
+                        })
+                        if (!flag) {
+                            this.getChartData['daily'].push({ name: `${dayName}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
                         }
-                    })
-                    if (!flag) {
-                        this.getChartData['daily'].push({ name: `${dayName}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
-                    }
-                }
-
-                const weeks = [
-                    "This Weak", "Weak 1", "Weak 2", "Weak 3",
-                ];
-                let weekSelected = ''
-                if (daysDifference <= 7) {
-                    weekSelected = weeks[0]
-                }
-                if (daysDifference > 7 && daysDifference <= 14) {
-                    weekSelected = weeks[1]
-                }
-                if (daysDifference > 14 && daysDifference <= 21) {
-                    weekSelected = weeks[2]
-                }
-                if (daysDifference > 21 && daysDifference <= 28) {
-                    weekSelected = weeks[3]
-                }
-
-                if (daysDifference >= 0 && daysDifference <= 28) {
-                    let flag = false
-                    this.getChartData['weakly'].filter((item) => {
-                        if (item.dataset == this.getCurrentSaleData.dataset && item.name == weekSelected) {
-                            item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
-                            flag = true
-                        }
-                    })
-                    if (!flag) {
-                        this.getChartData['weakly'].push({ name: `${weekSelected}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
-                    }
-                }
-                const months = [
-                    "January", "February", "March", "April", "May", "June",
-                    "July", "August", "September", "October", "November", "December"
-                ];
-                const selectedYear = selectedDate.getFullYear();
-                const selectedMonth = selectedDate.getMonth();
-                const currentYear = currentDate.getFullYear();
-
-
-
-                if (selectedYear == currentYear) {
-                    const selectedMonthName = months[selectedMonth];
-
-                    let flag = false
-                    this.getChartData['monthly'].filter((item) => {
-                        if (item.dataset == this.getCurrentSaleData.dataset && selectedMonthName == item.name) {
-                            item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
-                            flag = true
-
-                        }
-                    })
-                    if (!flag) {
-                        this.getChartData['monthly'].push({ name: `${selectedMonthName}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
-
                     }
 
-                }
-
-                // for year
-
-                const yearDifference = currentYear - selectedYear;
-
-                console.log(`Year difference between selected year (${selectedYear}) and current year (${currentYear}) is: ${yearDifference} years.`);
-
-                let years = ["This Year", "Year 1", "Year 2", "Year 3", "Year 4"]
-                let selectedYearName = years[yearDifference]
-                if (yearDifference >= 0 && yearDifference < 5) {
-                    console.log
-                    let flag = false
-                    this.getChartData['yearly'].filter((item) => {
-                        if (item.dataset == this.getCurrentSaleData.dataset && item.name == selectedYearName) {
-                            item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
-                            flag = true
-                        }
-                    })
-                    if (!flag) {
-                        this.getChartData['yearly'].push({ name: `${selectedYearName}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
+                    const weeks = [
+                        "This Weak", "Weak 1", "Weak 2", "Weak 3",
+                    ];
+                    let weekSelected = ''
+                    if (daysDifference <= 7) {
+                        weekSelected = weeks[0]
                     }
-                }
-                // setInterval(() => {
-                //     console.log('set time ', this.getChartData)
-                // }, 1000);
+                    if (daysDifference > 7 && daysDifference <= 14) {
+                        weekSelected = weeks[1]
+                    }
+                    if (daysDifference > 14 && daysDifference <= 21) {
+                        weekSelected = weeks[2]
+                    }
+                    if (daysDifference > 21 && daysDifference <= 28) {
+                        weekSelected = weeks[3]
+                    }
+
+                    if (daysDifference >= 0 && daysDifference <= 28) {
+                        let flag = false
+                        this.getChartData['weakly'].filter((item) => {
+                            if (item.dataset == this.getCurrentSaleData.dataset && item.name == weekSelected) {
+                                item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
+                                flag = true
+                            }
+                        })
+                        if (!flag) {
+                            this.getChartData['weakly'].push({ name: `${weekSelected}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
+                        }
+                    }
+                    const months = [
+                        "January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"
+                    ];
+                    const selectedYear = selectedDate.getFullYear();
+                    const selectedMonth = selectedDate.getMonth();
+                    const currentYear = currentDate.getFullYear();
+
+
+
+                    if (selectedYear == currentYear) {
+                        const selectedMonthName = months[selectedMonth];
+
+                        let flag = false
+                        this.getChartData['monthly'].filter((item) => {
+                            if (item.dataset == this.getCurrentSaleData.dataset && selectedMonthName == item.name) {
+                                item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
+                                flag = true
+
+                            }
+                        })
+                        if (!flag) {
+                            this.getChartData['monthly'].push({ name: `${selectedMonthName}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
+
+                        }
+
+                    }
+
+                    // for year
+
+                    const yearDifference = currentYear - selectedYear;
+
+                    console.log(`Year difference between selected year (${selectedYear}) and current year (${currentYear}) is: ${yearDifference} years.`);
+
+                    let years = ["This Year", "Year 1", "Year 2", "Year 3", "Year 4"]
+                    let selectedYearName = years[yearDifference]
+                    if (yearDifference >= 0 && yearDifference < 5) {
+                        console.log
+                        let flag = false
+                        this.getChartData['yearly'].filter((item) => {
+                            if (item.dataset == this.getCurrentSaleData.dataset && item.name == selectedYearName) {
+                                item.value = Number(item.value) + Number(this.getCurrentSaleData.value)
+                                flag = true
+                            }
+                        })
+                        if (!flag) {
+                            this.getChartData['yearly'].push({ name: `${selectedYearName}`, value: this.getCurrentSaleData.value, dataset: this.getCurrentSaleData.dataset })
+                        }
+                    }
+                    // setInterval(() => {
+                    //     console.log('set time ', this.getChartData)
+                    // }, 1000);
+               
+               
 
             },
             deep: true

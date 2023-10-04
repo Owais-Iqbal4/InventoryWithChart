@@ -23,7 +23,8 @@
                         <input v-model="sellDate" type="date">
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" :disabled="!sellDate" data-dismiss="modal">Close</button>
+                        <button class="btn btn-secondary" :disabled="!sellDate" data-dismiss="modal"
+                            @click="OnCLose">Close</button>
                     </div>
                 </div>
             </div>
@@ -38,6 +39,7 @@ export default {
         return {
             filterPrdAray: [],
             sellDate: '',
+            productIndex: null,
             currentSaleData: {
                 date: '',
                 value: 0,
@@ -48,18 +50,33 @@ export default {
     methods: {
         FinalPurchase(index) {
 
-            this.currentSaleData.value = this.getProducts[index].price
-            this.currentSaleData.dataset = this.getProducts[index].name
-            this.$store.commit('ORDERS', this.getProducts[index])
-            
+
+            this.productIndex = index
+
+        },
+        OnCLose() {
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+            const day = String(currentDate.getDate()).padStart(2, '0');
+            const formattedDate = `${year}-${month}-${day}`;
+
+            if (new Date(formattedDate) >= new Date(this.sellDate)) {
+                this.currentSaleData.value = this.getProducts[this.productIndex].price
+                this.currentSaleData.dataset = this.getProducts[this.productIndex].name
+                this.currentSaleData.date = this.sellDate
+                this.$store.commit('ORDERS', this.getProducts[this.productIndex])
+                this.$store.commit('CURRENT_SALES_DATA', this.currentSaleData)
+            }
+            else {
+                alert('Please select current date or below')
+            }
         }
     },
     watch: {
-        sellDate() {
-            this.currentSaleData.date = this.sellDate
-            console.log('this.currentSaleData ',this.currentSaleData)
-            this.$store.commit('CURRENT_SALES_DATA',this.currentSaleData)
-        },
+        // sellDate() {
+
+        // },
         getSelectCategory() {
             if (this.getSelectCategory == '') {
                 this.$store.commit('SEARCH_PRODUCT', '')
