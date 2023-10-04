@@ -126,7 +126,7 @@ export default {
 
                 // Get the current date
                 const currentDate = new Date();
-                console.log(currentDate)
+                // console.log(currentDate)
                 
                
 
@@ -220,12 +220,12 @@ export default {
 
                     const yearDifference = currentYear - selectedYear;
 
-                    console.log(`Year difference between selected year (${selectedYear}) and current year (${currentYear}) is: ${yearDifference} years.`);
+                    // console.log(`Year difference between selected year (${selectedYear}) and current year (${currentYear}) is: ${yearDifference} years.`);
 
                     let years = ["This Year", "Year 1", "Year 2", "Year 3", "Year 4"]
                     let selectedYearName = years[yearDifference]
                     if (yearDifference >= 0 && yearDifference < 5) {
-                        console.log
+                        
                         let flag = false
                         this.getChartData['yearly'].filter((item) => {
                             if (item.dataset == this.getCurrentSaleData.dataset && item.name == selectedYearName) {

@@ -33,7 +33,7 @@
           }
           groupedData[item.dataset].push([item.name, item.value]);
         });
-        console.log(groupedData)
+        // console.log(groupedData)
       
         return Object.entries(groupedData).map(([dataset, values]) => ({
           name: dataset,

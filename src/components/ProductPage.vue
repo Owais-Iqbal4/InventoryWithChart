@@ -84,14 +84,14 @@ export default {
             let filterArray = this.getProducts.filter(el => el.filter == this.getSelectCategory)
             // this.$store.commit('PRODUCTS',filterArray)
             this.filterPrdAray = filterArray
-            console.log('filterArray ', filterArray)
+            // console.log('filterArray ', filterArray)
         },
         getSearchProduct() {
 
             let filterArray = this.getProducts.filter(el => el.type == this.getSearchProduct)
             // this.$store.commit('PRODUCTS',filterArray)
             this.filterPrdAray = filterArray
-            console.log('filterArray ', filterArray)
+            // console.log('filterArray ', filterArray)
         }
     },
     computed: {
